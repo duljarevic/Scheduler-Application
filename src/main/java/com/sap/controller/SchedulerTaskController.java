@@ -7,10 +7,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.sap.dto.ResponseDTO;
-import com.sap.dto.BillsDTO;
+import com.sap.dto.SchedulerTaskDTO;
 import com.sap.exeption.CustomNotFoundException;
-import com.sap.security.services.SchedulerTaskService;
+import com.sap.services.SchedulerTaskService;
 
+/**
+ * REST controller for managing {@link com.sap.model.SchedulerTask}.
+ */
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api")
@@ -27,30 +30,30 @@ public class SchedulerTaskController {
 	@GetMapping(value = "/scheduler-tasks")
 	public ResponseEntity<?> getAllTasks() {
 		log.debug("REST request to get Scheduler Tasks : {}");
-		List<BillsDTO> res = schedulerTaskServices.loadAll();
+		List<SchedulerTaskDTO> res = schedulerTaskServices.loadAll();
 		return new ResponseEntity(new ResponseDTO(res), HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/scheduler-task/{id}")
 	ResponseEntity<?> findTaskById(@PathVariable Long id) throws Exception {
 		log.debug("REST request to get Scheduler Tasks by id: {}", id);
-		BillsDTO bill = this.schedulerTaskServices.findById(id);
+		SchedulerTaskDTO bill = this.schedulerTaskServices.findById(id);
 		return new ResponseEntity<>(new ResponseDTO(bill), HttpStatus.OK);
 	}
 	
 	@PostMapping(value= "/scheduler-task")
-	ResponseEntity<?> addNewTask(@RequestBody BillsDTO input) throws Exception {
-		log.debug("REST request to post Scheduler Tasks : {}", input.getCena());
+	ResponseEntity<?> addNewTask(@RequestBody SchedulerTaskDTO input) throws Exception {
+		log.debug("REST request to post Scheduler Tasks : {}", input.getName());
 		Long id = this.schedulerTaskServices.create(input);
-		BillsDTO bill = this.schedulerTaskServices.findById(id);
+		SchedulerTaskDTO bill = this.schedulerTaskServices.findById(id);
 		return new ResponseEntity<>(new ResponseDTO(bill), HttpStatus.CREATED);
 	}
 
 	@PutMapping(value = "/scheduler-task/{id}")
-	ResponseEntity<?> updateTask(@PathVariable Long id, @RequestBody BillsDTO input) throws Exception {
+	ResponseEntity<?> updateTask(@PathVariable Long id, @RequestBody SchedulerTaskDTO input) throws Exception {
 		log.debug("REST request to update Scheduler Tasks by id : {}", id);
 		this.schedulerTaskServices.update(input);
-		BillsDTO bill = this.schedulerTaskServices.findById(id);
+		SchedulerTaskDTO bill = this.schedulerTaskServices.findById(id);
 		return new ResponseEntity<>(new ResponseDTO(bill), HttpStatus.OK);
 	}
 

@@ -1,4 +1,4 @@
-package com.sap.security.servicesImpl;
+package com.sap.services.servicesImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,12 +7,12 @@ import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import com.sap.dto.BillsDTO;
+import com.sap.dto.SchedulerTaskDTO;
 import com.sap.exeption.CustomNotFoundException;
 import com.sap.mapper.SchedulerTaskMapper;
 import com.sap.model.SchedulerTask;
 import com.sap.repository.SchedulerTaskRepository;
-import com.sap.security.services.SchedulerTaskService;
+import com.sap.services.SchedulerTaskService;
 
 @Service
 @Transactional
@@ -29,14 +29,14 @@ public class SchedulerTaskServiceImpl implements SchedulerTaskService {
 	}
 
 	@Override
-	public List<BillsDTO> loadAll() {
+	public List<SchedulerTaskDTO> loadAll() {
 		List<SchedulerTask> res = schedulerTaskRepository.findAll();
-		List<BillsDTO> res1 = schedulerTaskMapper.enitiesToDtos(res);
+		List<SchedulerTaskDTO> res1 = schedulerTaskMapper.enitiesToDtos(res);
 		return res1;
 	}
 	
 	@Override
-	public Long create(BillsDTO input) {
+	public Long create(SchedulerTaskDTO input) {
 		
 		SchedulerTask entity = schedulerTaskMapper.dtoToEntity(input);
 		SchedulerTask bill = schedulerTaskRepository.save(entity);
@@ -45,7 +45,7 @@ public class SchedulerTaskServiceImpl implements SchedulerTaskService {
 	
 	@Override
 
-	public void update(BillsDTO input) throws Exception {
+	public void update(SchedulerTaskDTO input) throws Exception {
 		
 	
 		SchedulerTask schedulerTask = schedulerTaskRepository.findById(input.getId()).orElse(null);
@@ -64,7 +64,7 @@ public class SchedulerTaskServiceImpl implements SchedulerTaskService {
 	}
 	
 	@Override
-	public BillsDTO findById(Long id) throws Exception {
+	public SchedulerTaskDTO findById(Long id) throws Exception {
 		
 		
 		if (id == null) {
@@ -72,8 +72,8 @@ public class SchedulerTaskServiceImpl implements SchedulerTaskService {
 		}
 		Optional<SchedulerTask> bill = schedulerTaskRepository.findById(id);
 		SchedulerTask b = bill.orElseThrow(() -> new CustomNotFoundException("NOT FOUND"));
-		BillsDTO billsDTO = schedulerTaskMapper.entityToDto(b);
-		return billsDTO;
+		SchedulerTaskDTO schedulerTaskDTO = schedulerTaskMapper.entityToDto(b);
+		return schedulerTaskDTO;
 	}
 	
 	@Override
