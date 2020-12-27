@@ -1,4 +1,4 @@
-package com.sap.mapperImpl;
+package com.sap.mapper.mapperImpl;
 
 import java.util.ArrayList;
 import java.util.List;
