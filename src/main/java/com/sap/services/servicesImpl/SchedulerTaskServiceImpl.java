@@ -30,21 +30,35 @@ public class SchedulerTaskServiceImpl implements SchedulerTaskService {
 
 	@Override
 	public List<SchedulerTaskDTO> loadAll() {
+		log.debug("Service request to getAll Scheduler Tasks : {}");
 		List<SchedulerTask> res = schedulerTaskRepository.findAll();
 		List<SchedulerTaskDTO> res1 = schedulerTaskMapper.enitiesToDtos(res);
 		return res1;
 	}
+
+	@Override
+	public SchedulerTaskDTO findById(Long id) throws Exception {
+		log.debug("Service request to find by id Scheduler Tasks : {}", id);
+		if (id == null) {
+			throw new Exception("NOT FOUND");
+		}
+		Optional<SchedulerTask> schedulerTask = schedulerTaskRepository.findById(id);
+		SchedulerTask b = schedulerTask.orElseThrow(() -> new CustomNotFoundException("NOT FOUND"));
+		SchedulerTaskDTO schedulerTaskDTO = schedulerTaskMapper.entityToDto(b);
+		return schedulerTaskDTO;
+	}
 	
 	@Override
 	public Long create(SchedulerTaskDTO input) {
-		
+		log.debug("Service request to create Scheduler Tasks : {}", input.getName());
 		SchedulerTask entity = schedulerTaskMapper.dtoToEntity(input);
-		SchedulerTask bill = schedulerTaskRepository.save(entity);
-		return bill.getId();
+		SchedulerTask schedulerTask = schedulerTaskRepository.save(entity);
+		return schedulerTask.getId();
 	}
 	
 	@Override
 	public void update(SchedulerTaskDTO input) throws Exception {
+		log.debug("Service request to update Scheduler Tasks : {}", input.getId());
 		SchedulerTask schedulerTask = schedulerTaskRepository.findById(input.getId()).orElse(null);
 		if (input.getId() == null || schedulerTask == null) {
 			throw new CustomNotFoundException("NOT FOUND");
@@ -54,29 +68,18 @@ public class SchedulerTaskServiceImpl implements SchedulerTaskService {
 	}
 	
 	@Override
-	public void delete(Long id) {
+	public void delete(Long id) throws CustomNotFoundException {
+		log.debug("Service request to delete Scheduler Tasks : {}", id);
+		if (id == null) {
+			throw new CustomNotFoundException("NOT FOUND");
+		}
 		schedulerTaskRepository.deleteById(id);
 	}
-	
-	@Override
-	public SchedulerTaskDTO findById(Long id) throws Exception {
-		
-		
-		if (id == null) {
-			throw new Exception("NOT FOUND");
-		}
-		Optional<SchedulerTask> bill = schedulerTaskRepository.findById(id);
-		SchedulerTask b = bill.orElseThrow(() -> new CustomNotFoundException("NOT FOUND"));
-		SchedulerTaskDTO schedulerTaskDTO = schedulerTaskMapper.entityToDto(b);
-		return schedulerTaskDTO;
-	}
-	
+
 	@Override
 	public boolean exists(Long id) {
-		boolean bill = schedulerTaskRepository.existsById(id);
-		return bill;
+		log.debug("Service request to exists Scheduler Tasks : {}", id);
+		boolean schedulerTask = schedulerTaskRepository.existsById(id);
+		return schedulerTask;
 	}
-
-
-
 }
