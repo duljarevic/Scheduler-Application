@@ -1,4 +1,4 @@
-package com.sap.message.request;
+package com.sap.web.rest.message.request;
 
 import java.util.Set;
 

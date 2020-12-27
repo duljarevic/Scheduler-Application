@@ -2,7 +2,7 @@ package com.sap.services;
 
 import java.util.List;
 
-import com.sap.dto.SchedulerTaskDTO;
+import com.sap.web.rest.dto.SchedulerTaskDTO;
 
 public interface SchedulerTaskService {
 	

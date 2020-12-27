@@ -1,4 +1,4 @@
-package com.sap.security.jwt;
+package com.sap.config.jwt;
 
 import java.io.IOException;
 

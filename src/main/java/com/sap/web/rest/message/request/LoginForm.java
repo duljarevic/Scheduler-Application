@@ -1,4 +1,4 @@
-package com.sap.message.request;
+package com.sap.web.rest.message.request;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;

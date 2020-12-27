@@ -1,8 +1,9 @@
-package com.sap.controller;
+package com.sap.web.rest;
 
 import java.util.HashSet;
 import java.util.Set;
 import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -18,23 +19,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.sap.message.request.LoginForm;
-import com.sap.message.request.SignUpForm;
-import com.sap.message.response.JwtResponse;
-import com.sap.message.response.ResponseMessage;
+import com.sap.web.rest.message.request.LoginForm;
+import com.sap.web.rest.message.request.SignUpForm;
+import com.sap.web.rest.message.response.JwtResponse;
+import com.sap.web.rest.message.response.ResponseMessage;
 import com.sap.model.Role;
 import com.sap.model.RoleName;
 import com.sap.model.User;
 import com.sap.repository.RoleRepository;
 import com.sap.repository.UserRepository;
-import com.sap.security.jwt.JwtProvider;
+import com.sap.config.jwt.JwtProvider;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
 public class AuthRestAPIs {
 
-	private final Logger log = LoggerFactory.getLogger(SchedulerTaskController.class);
+	private final Logger log = LoggerFactory.getLogger(SchedulerTaskResource.class);
 
 	private AuthenticationManager authenticationManager;
 	private UserRepository userRepository;

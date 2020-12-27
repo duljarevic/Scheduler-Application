@@ -13,11 +13,9 @@ public class SchedulerTask implements Serializable{
 	private Long id;
 	
 	@Column(name = "name", length = 250)
-	@Max(250)
 	private String name;
 	
 	@Column(name = "recurrency", length = 30)
-	@Max(30)
 	private String recurrency;
 
 	@Column(name = "code")

@@ -1,4 +1,4 @@
-package com.sap.exeption;
+package com.sap.web.rest.exeption;
 
 public class BaseException extends Exception {
 	

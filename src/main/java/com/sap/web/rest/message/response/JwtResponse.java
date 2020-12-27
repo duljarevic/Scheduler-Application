@@ -1,4 +1,4 @@
-package com.sap.message.response;
+package com.sap.web.rest.message.response;
 
 import java.util.Collection;
 

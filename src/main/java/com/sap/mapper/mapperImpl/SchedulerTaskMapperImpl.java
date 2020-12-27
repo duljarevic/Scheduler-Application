@@ -3,7 +3,7 @@ package com.sap.mapper.mapperImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Component;
-import com.sap.dto.SchedulerTaskDTO;
+import com.sap.web.rest.dto.SchedulerTaskDTO;
 import com.sap.mapper.SchedulerTaskMapper;
 import com.sap.model.SchedulerTask;
 

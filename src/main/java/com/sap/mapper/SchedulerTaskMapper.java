@@ -1,6 +1,6 @@
 package com.sap.mapper;
 
-import com.sap.dto.SchedulerTaskDTO;
+import com.sap.web.rest.dto.SchedulerTaskDTO;
 import com.sap.model.SchedulerTask;
 import java.util.List;
 import org.mapstruct.Mapper;

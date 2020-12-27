@@ -1,4 +1,4 @@
-package com.sap.security.jwt;
+package com.sap.config.jwt;
 
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;

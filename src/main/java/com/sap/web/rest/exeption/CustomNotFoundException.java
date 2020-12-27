@@ -1,4 +1,6 @@
-package com.sap.exeption;
+package com.sap.web.rest.exeption;
+
+import com.sap.web.rest.exeption.BaseException;
 
 public class CustomNotFoundException extends BaseException {
 	

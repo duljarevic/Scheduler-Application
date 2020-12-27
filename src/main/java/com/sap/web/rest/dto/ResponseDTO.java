@@ -1,4 +1,4 @@
-package com.sap.dto;
+package com.sap.web.rest.dto;
 
 import java.util.List;
 
