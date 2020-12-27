@@ -1,6 +1,7 @@
 package com.sap.web.rest;
 
 import java.util.List;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -39,7 +40,7 @@ public class SchedulerTaskResource {
 	@GetMapping(value = "/scheduler-task/{id}")
 	ResponseEntity<?> findTaskById(@PathVariable Long id) throws Exception {
 		log.debug("REST request to get Scheduler Tasks by id: {}", id);
-		SchedulerTaskDTO schedulerTaskDTO = this.schedulerTaskServices.findById(id);
+		Optional<SchedulerTaskDTO> schedulerTaskDTO = this.schedulerTaskServices.findById(id);
 		return new ResponseEntity<>(new ResponseDTO(schedulerTaskDTO), HttpStatus.OK);
 	}
 	
@@ -47,7 +48,7 @@ public class SchedulerTaskResource {
 	ResponseEntity<?> addNewTask(@Valid @RequestBody SchedulerTaskDTO input) throws Exception {
 		log.debug("REST request to post Scheduler Tasks : {}", input.getName());
 		Long id = this.schedulerTaskServices.create(input);
-		SchedulerTaskDTO schedulerTaskDTO = this.schedulerTaskServices.findById(id);
+		Optional<SchedulerTaskDTO> schedulerTaskDTO = this.schedulerTaskServices.findById(id);
 		return new ResponseEntity<>(new ResponseDTO(schedulerTaskDTO), HttpStatus.CREATED);
 	}
 
@@ -55,7 +56,7 @@ public class SchedulerTaskResource {
 	ResponseEntity<?> updateTask(@Valid @RequestBody SchedulerTaskDTO input) throws Exception {
 		log.debug("REST request to update Scheduler Tasks by id : {}", input.getId());
 		this.schedulerTaskServices.update(input);
-		SchedulerTaskDTO schedulerTaskDTO = this.schedulerTaskServices.findById(input.getId());
+		Optional<SchedulerTaskDTO> schedulerTaskDTO = this.schedulerTaskServices.findById(input.getId());
 		return new ResponseEntity<>(new ResponseDTO(schedulerTaskDTO), HttpStatus.OK);
 	}
 

@@ -3,6 +3,7 @@ package com.sap.mapper;
 import com.sap.web.rest.dto.SchedulerTaskDTO;
 import com.sap.model.SchedulerTask;
 import java.util.List;
+import java.util.Optional;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;

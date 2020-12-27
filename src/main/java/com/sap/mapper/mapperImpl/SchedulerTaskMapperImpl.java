@@ -39,7 +39,6 @@ public class SchedulerTaskMapperImpl implements SchedulerTaskMapper {
 		return schedulerTask;
 	}
 
-	@Override
 	public SchedulerTask updateEntityFromDto(SchedulerTaskDTO dto, SchedulerTask entity) {
 		 if ( dto == null ) {
 	            return null;
@@ -47,7 +46,9 @@ public class SchedulerTaskMapperImpl implements SchedulerTaskMapper {
 		 entity.setId(dto.getId());
 		 entity.setName(dto.getName());
 		 entity.setCode(dto.getCode());
-		 entity.setRecurrency(dto.getRecurrency());;
+		 entity.setRecurrency(dto.getRecurrency());
+
+
 		return entity;
 	}
 

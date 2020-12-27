@@ -14,6 +14,18 @@ public class SchedulerTaskDTO {
 	private String recurrency;
 	private String code;
 
+	public SchedulerTaskDTO(Long id,
+			@Size(max = 250) String name,
+			@Size(max = 30) String recurrency,
+			String code) {
+		this.id = id;
+		this.name = name;
+		this.recurrency = recurrency;
+		this.code = code;
+	}
+
+	public SchedulerTaskDTO() {}
+
 	public Long getId() {
 		return id;
 	}

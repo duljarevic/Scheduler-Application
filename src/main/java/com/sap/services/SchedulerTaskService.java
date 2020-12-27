@@ -4,6 +4,7 @@ import com.sap.web.rest.exeption.CustomNotFoundException;
 import java.util.List;
 
 import com.sap.web.rest.dto.SchedulerTaskDTO;
+import java.util.Optional;
 
 public interface SchedulerTaskService {
 	
@@ -11,7 +12,7 @@ public interface SchedulerTaskService {
 	Long create(SchedulerTaskDTO input);
 	void update(SchedulerTaskDTO input) throws Exception;
 	void delete(Long id) throws CustomNotFoundException;
-	SchedulerTaskDTO findById(Long id) throws Exception;
+	Optional<SchedulerTaskDTO> findById(Long id) throws Exception;
 	boolean exists(Long id);
 
 }

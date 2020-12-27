@@ -37,7 +37,7 @@ public class SchedulerTaskServiceImpl implements SchedulerTaskService {
 	}
 
 	@Override
-	public SchedulerTaskDTO findById(Long id) throws Exception {
+	public Optional<SchedulerTaskDTO> findById(Long id) throws Exception {
 		log.debug("Service request to find by id Scheduler Tasks : {}", id);
 		if (id == null) {
 			throw new Exception("NOT FOUND");
@@ -45,7 +45,7 @@ public class SchedulerTaskServiceImpl implements SchedulerTaskService {
 		Optional<SchedulerTask> schedulerTask = schedulerTaskRepository.findById(id);
 		SchedulerTask b = schedulerTask.orElseThrow(() -> new CustomNotFoundException("NOT FOUND"));
 		SchedulerTaskDTO schedulerTaskDTO = schedulerTaskMapper.entityToDto(b);
-		return schedulerTaskDTO;
+		return Optional.ofNullable(schedulerTaskDTO);
 	}
 	
 	@Override
@@ -58,12 +58,11 @@ public class SchedulerTaskServiceImpl implements SchedulerTaskService {
 	
 	@Override
 	public void update(SchedulerTaskDTO input) throws Exception {
-		log.debug("Service request to update Scheduler Tasks : {}", input.getId());
 		SchedulerTask schedulerTask = schedulerTaskRepository.findById(input.getId()).orElse(null);
 		if (input.getId() == null || schedulerTask == null) {
 			throw new CustomNotFoundException("NOT FOUND");
 		}
-		schedulerTaskMapper.updateEntityFromDto(input, schedulerTask);
+    	schedulerTaskMapper.updateEntityFromDto(input, schedulerTask);
 	    schedulerTaskRepository.save(schedulerTask);
 	}
 	
