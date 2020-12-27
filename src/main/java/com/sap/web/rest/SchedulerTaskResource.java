@@ -51,11 +51,11 @@ public class SchedulerTaskResource {
 		return new ResponseEntity<>(new ResponseDTO(schedulerTaskDTO), HttpStatus.CREATED);
 	}
 
-	@PutMapping(value = "/scheduler-task/{id}")
-	ResponseEntity<?> updateTask(@PathVariable Long id,@Valid @RequestBody SchedulerTaskDTO input) throws Exception {
-		log.debug("REST request to update Scheduler Tasks by id : {}", id);
+	@PutMapping(value = "/scheduler-task")
+	ResponseEntity<?> updateTask(@Valid @RequestBody SchedulerTaskDTO input) throws Exception {
+		log.debug("REST request to update Scheduler Tasks by id : {}", input.getId());
 		this.schedulerTaskServices.update(input);
-		SchedulerTaskDTO schedulerTaskDTO = this.schedulerTaskServices.findById(id);
+		SchedulerTaskDTO schedulerTaskDTO = this.schedulerTaskServices.findById(input.getId());
 		return new ResponseEntity<>(new ResponseDTO(schedulerTaskDTO), HttpStatus.OK);
 	}
 
@@ -66,6 +66,6 @@ public class SchedulerTaskResource {
 			throw new CustomNotFoundException("NOT FOUND");
 		}
 		this.schedulerTaskServices.delete(id);
-		return new ResponseEntity<>(new ResponseDTO("OK"), HttpStatus.OK);
+		return new ResponseEntity<>(new ResponseDTO("Scheduler Task is deleted"), HttpStatus.OK);
 	}
 }

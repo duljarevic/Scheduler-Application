@@ -44,18 +44,13 @@ public class SchedulerTaskServiceImpl implements SchedulerTaskService {
 	}
 	
 	@Override
-
 	public void update(SchedulerTaskDTO input) throws Exception {
-		
-	
 		SchedulerTask schedulerTask = schedulerTaskRepository.findById(input.getId()).orElse(null);
 		if (input.getId() == null || schedulerTask == null) {
 			throw new CustomNotFoundException("NOT FOUND");
 		}
-		
 		schedulerTaskMapper.updateEntityFromDto(input, schedulerTask);
 	    schedulerTaskRepository.save(schedulerTask);
-		
 	}
 	
 	@Override
