@@ -3,6 +3,7 @@ package com.sap.model;
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "scheduler_task")

@@ -1,16 +1,16 @@
 package com.sap.web.rest.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import javax.validation.constraints.Size;
 
-import javax.validation.constraints.Max;
-
-@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(Include.NON_NULL)
 public class SchedulerTaskDTO {
 
 	private Long id;
-	@Max(250)
+	@Size(max = 250)
 	private String name;
-	@Max(30)
+	@Size(max = 30)
 	private String recurrency;
 	private String code;
 

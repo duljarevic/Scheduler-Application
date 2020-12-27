@@ -29,7 +29,7 @@ public class SchedulerTaskResource {
 		this.schedulerTaskServices = schedulerTaskServices;
 	}
 
-	@GetMapping(value = "/scheduler-tasks")
+	@GetMapping(value = "/scheduler-task")
 	public ResponseEntity<?> getAllTasks() {
 		log.debug("REST request to get Scheduler Tasks : {}");
 		List<SchedulerTaskDTO> res = schedulerTaskServices.loadAll();
@@ -39,24 +39,24 @@ public class SchedulerTaskResource {
 	@GetMapping(value = "/scheduler-task/{id}")
 	ResponseEntity<?> findTaskById(@PathVariable Long id) throws Exception {
 		log.debug("REST request to get Scheduler Tasks by id: {}", id);
-		SchedulerTaskDTO bill = this.schedulerTaskServices.findById(id);
-		return new ResponseEntity<>(new ResponseDTO(bill), HttpStatus.OK);
+		SchedulerTaskDTO schedulerTaskDTO = this.schedulerTaskServices.findById(id);
+		return new ResponseEntity<>(new ResponseDTO(schedulerTaskDTO), HttpStatus.OK);
 	}
 	
 	@PostMapping(value= "/scheduler-task")
 	ResponseEntity<?> addNewTask(@Valid @RequestBody SchedulerTaskDTO input) throws Exception {
 		log.debug("REST request to post Scheduler Tasks : {}", input.getName());
 		Long id = this.schedulerTaskServices.create(input);
-		SchedulerTaskDTO bill = this.schedulerTaskServices.findById(id);
-		return new ResponseEntity<>(new ResponseDTO(bill), HttpStatus.CREATED);
+		SchedulerTaskDTO schedulerTaskDTO = this.schedulerTaskServices.findById(id);
+		return new ResponseEntity<>(new ResponseDTO(schedulerTaskDTO), HttpStatus.CREATED);
 	}
 
 	@PutMapping(value = "/scheduler-task/{id}")
-	ResponseEntity<?> updateTask(@PathVariable Long id, @RequestBody SchedulerTaskDTO input) throws Exception {
+	ResponseEntity<?> updateTask(@PathVariable Long id,@Valid @RequestBody SchedulerTaskDTO input) throws Exception {
 		log.debug("REST request to update Scheduler Tasks by id : {}", id);
 		this.schedulerTaskServices.update(input);
-		SchedulerTaskDTO bill = this.schedulerTaskServices.findById(id);
-		return new ResponseEntity<>(new ResponseDTO(bill), HttpStatus.OK);
+		SchedulerTaskDTO schedulerTaskDTO = this.schedulerTaskServices.findById(id);
+		return new ResponseEntity<>(new ResponseDTO(schedulerTaskDTO), HttpStatus.OK);
 	}
 
 	@DeleteMapping(value = "/scheduler-task/{id}")
